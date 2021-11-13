@@ -9,17 +9,13 @@ using UnityEngine.UI;
     [DefaultExecutionOrder(1000)]
 public class MenuUIhandler : MonoBehaviour
 {
-    public InputField playerName;
-    string Name;
+    public InputField iField;
+    public static string playerName;
 
     public void StartNew(){
         SceneManager.LoadScene(1);
 
         SetTheText();
-    }
-
-    void huj(){
-        Debug.Log(Name);
     }
 
     // Update is called once per frame
@@ -32,7 +28,6 @@ public class MenuUIhandler : MonoBehaviour
     }
 
     public void SetTheText(){
-        Name = playerName.text; 
-        huj();
+        playerName = iField.text; 
     }
 }

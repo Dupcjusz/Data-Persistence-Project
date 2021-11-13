@@ -16,13 +16,15 @@ public class MainManager : MonoBehaviour
     public GameObject GameOverText;
     
     private bool m_Started = false;
-    private int m_Points;
+    public static int m_Points;
     
     private bool m_GameOver = false;
+    public Text BestScore;
+    public static string BestPlayer;
+    public static string Name;
+    private int theBest;
 
-    
-
-    void Awake(){
+    /*void Awake(){
 
         if (Instance != null){
             Destroy(gameObject);
@@ -30,10 +32,11 @@ public class MainManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-    }
+    }*/
     // Start is called before the first frame update
     void Start()
     {
+        m_Points = 0;
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
         
@@ -48,6 +51,10 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        Name = MenuUIhandler.playerName;
+        theBest = EndManager.Best;
+        BestPlayer = EndManager.BestPlayerName;
     }
 
     private void Update()
@@ -69,9 +76,23 @@ public class MainManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+               const float step = 0.6f;
+                int perLine = Mathf.FloorToInt(4.0f / step);
+        
+                int[] pointCountArray = new [] {1,1,2,2,5,5};
+                for (int i = 0; i < LineCount; ++i)
+                {
+                    for (int x = 0; x < perLine; ++x)
+                    {
+                        Vector3 position = new Vector3(-1.5f + step * x, 2.5f + i * 0.3f, 0);
+                        var brick = Instantiate(BrickPrefab, position, Quaternion.identity);
+                        brick.PointValue = pointCountArray[i];
+                        brick.onDestroyed.AddListener(AddPoint);
+                    }
+                }
             }
         }
+        BestScore.text = "Best Score: " + BestPlayer + " : " + theBest;
     }
 
     void AddPoint(int point)
@@ -82,7 +103,6 @@ public class MainManager : MonoBehaviour
 
     public void GameOver()
     {
-        m_GameOver = true;
-        GameOverText.SetActive(true);
+        SceneManager.LoadScene(2);
     }
 }
