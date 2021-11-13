@@ -24,6 +24,10 @@ public class EndManager : MonoBehaviour
             Best = score;
             BestPlayerName = Name;
         }
+
+        if(score == 96){
+            SceneManager.LoadScene(3);
+        }
     }
 
     public void restart(){

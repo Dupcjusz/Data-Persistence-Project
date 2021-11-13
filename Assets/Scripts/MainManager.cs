@@ -93,6 +93,10 @@ public class MainManager : MonoBehaviour
             }
         }
         BestScore.text = "Best Score: " + BestPlayer + " : " + theBest;
+
+        if(m_Points == 96){
+            SceneManager.LoadScene(2);
+        }
     }
 
     void AddPoint(int point)
