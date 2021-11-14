@@ -53,8 +53,8 @@ public class MainManager : MonoBehaviour
         }
 
         Name = MenuUIhandler.playerName;
-        theBest = EndManager.Best;
-        BestPlayer = EndManager.BestPlayerName;
+        theBest = SaveLoad.Best;
+        BestPlayer = SaveLoad.BestPlayerName;
     }
 
     private void Update()

@@ -10,30 +10,28 @@ public class SaveLoad : MonoBehaviour
     public static string BestPlayerName;
     
     private void Awake(){
-        LoadScore();
+        Best = EndManager.Best;
+        BestPlayerName = MenuUIhandler.playerName;
     }
 
-    void Start(){
-        Best = EndManager.Best;
-        BestPlayerName = EndManager.BestPlayerName;
+    void update(){
+
     }
     [System.Serializable]
     class SaveData{
         public int score;
-        public string name;
+        public string playerName;
     }
 
     public void SaveScore(){
         SaveData data = new SaveData();
         data.score = Best;
-        data.name = BestPlayerName;
+        data.playerName = BestPlayerName;
         
         string json = JsonUtility.ToJson(data);
 
         File.WriteAllText(Application.persistentDataPath +
         "/savefile.json", json);
-
-        Debug.Log(Best + BestPlayerName);
     }
 
     public void LoadScore(){
@@ -44,7 +42,8 @@ public class SaveLoad : MonoBehaviour
             SaveData data = JsonUtility.FromJson<SaveData>(json);
 
             Best = data.score;
-            BestPlayerName = name;
+            BestPlayerName = data.playerName;
         }
     }
 }
+

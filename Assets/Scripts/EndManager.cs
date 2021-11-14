@@ -13,6 +13,7 @@ public class EndManager : MonoBehaviour
     public static int Best;
     public string Name;
     public static string BestPlayerName;
+    public MenuUIhandler menu;
 
     private void Awake(){
         
@@ -21,6 +22,9 @@ public class EndManager : MonoBehaviour
     void Start(){
         score = MainManager.m_Points;
         Name = MenuUIhandler.playerName;
+
+        Best = SaveLoad.Best;
+        BestPlayerName = SaveLoad.BestPlayerName;
 
         scoreText.text = "Score: " + score;
 
@@ -35,8 +39,8 @@ public class EndManager : MonoBehaviour
     }
 
     public void restart(){
-
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
+        MenuUIhandler.menuRestart();
     }
 
     public void BackToMenu(){

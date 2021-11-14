@@ -11,6 +11,7 @@ public class MenuUIhandler : MonoBehaviour
 {
     public InputField iField;
     public static string playerName;
+    
 
     public void StartNew(){
         SceneManager.LoadScene(1);
@@ -29,5 +30,9 @@ public class MenuUIhandler : MonoBehaviour
 
     public void SetTheText(){
         playerName = iField.text; 
+    }
+
+    public static void menuRestart(){
+        SceneManager.LoadScene(1);
     }
 }
